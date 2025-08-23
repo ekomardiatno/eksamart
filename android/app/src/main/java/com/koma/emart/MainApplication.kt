@@ -1,4 +1,4 @@
-package com.eksamartlegacy
+package com.koma.emart
 
 import android.app.Application
 import com.facebook.react.PackageList
