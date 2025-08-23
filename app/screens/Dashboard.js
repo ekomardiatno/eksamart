@@ -18,6 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import numberFormat from '../helpers/numberFormat'
 import dateFormat from '../helpers/dateFormat'
 import RNFS from 'react-native-fs'
+import { withSafeAreaInsets } from 'react-native-safe-area-context'
 
 const styles = require('../components/styles')
 
@@ -294,7 +295,7 @@ class Dashboard extends Component {
     const { fade, toTop } = this.state
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: this.props.insets.top, paddingBottom: this.props.insets.bottom }]}>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
         <View style={styles.header}>
           <Image style={{ height: 50, width: 50, marginRight: 5 }} source={require('../assets/images/EKSAMART.png')} />
@@ -436,8 +437,8 @@ class Dashboard extends Component {
                 style={{ width: 40, height: 40, borderRadius: 40 / 2, ...styles.bgLight, alignItems: 'center', justifyContent: 'center' }}
               ><Icon name="x" size={18} style={[styles.textDanger, { paddingVertical: 5 }]} /></TouchableOpacity>
             </View>
-            <Animated.View style={{ backgroundColor: '#fff', width: '100%', borderTopRightRadius: 20, borderTopLeftRadius: 20, transform: [{ translateY: toTop }] }}>
-              <View style={{ paddingHorizontal: 20, paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+            <Animated.View style={{ backgroundColor: '#fff', width: '100%', borderTopRightRadius: 20, borderTopLeftRadius: 20, transform: [{ translateY: toTop }], paddingBottom: this.props.insets.bottom }}>
+              <View style={{ paddingHorizontal: 20, paddingVertical: 20, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
                 <Text style={[styles.fontBold, styles.textBlack, { fontSize: 16 }]}>Belanjaan</Text>
                 <TouchableOpacity onPress={() => {
                   this.closeAlert()
@@ -448,11 +449,11 @@ class Dashboard extends Component {
                   <Text style={{ ...styles.textPrimary }}>Lihat struk</Text>
                 </TouchableOpacity>
               </View>
+              <View style={[{ marginBottom: 20, paddingHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+                <Text style={[styles.textMuted, styles.fontReg, { marginBottom: 3, fontSize: 13 }]}>Kode transaksi</Text>
+                <Text style={[styles.fontBold, styles.textBlack, styles.h4]}>{this.state.idPopupData}</Text>
+              </View>
               <ScrollView style={{ paddingHorizontal: 20, maxHeight: 60 / 100 * height }}>
-                <View style={[styles.alignCenter, { marginBottom: 15 }]}>
-                  <Text style={[styles.textMuted, styles.fontReg, { marginBottom: 3, fontSize: 13 }]}>Kode transaksi</Text>
-                  <Text style={[styles.fontBold, styles.textBlack, styles.h4]}>{this.state.idPopupData}</Text>
-                </View>
                 <View style={{ marginBottom: 10 }}>
                   {
                     this.state.popupData.map((d, i) => {
@@ -526,4 +527,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+export default withSafeAreaInsets(Dashboard)

@@ -1,13 +1,14 @@
 import { Component } from 'react'
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    ScrollView, Dimensions
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView, Dimensions
 } from 'react-native'
 import Icon from '@react-native-vector-icons/feather'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import numberFormat from '../helpers/numberFormat'
+import { withSafeAreaInsets } from 'react-native-safe-area-context'
 
 const { height, width } = Dimensions.get('window')
 const styles = require('../components/styles')
@@ -115,7 +116,7 @@ class Toko extends Component {
     let { rpLastMonth, qtyLastMonth, tLastMonth } = this.state
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: this.props.insets.top, paddingBottom: this.props.insets.bottom }]}>
         <View style={[styles.header]}>
           <TouchableOpacity onPress={() => {
             this.props.navigation.goBack()
@@ -165,4 +166,4 @@ class Toko extends Component {
   }
 }
 
-export default Toko
+export default withSafeAreaInsets(Toko)

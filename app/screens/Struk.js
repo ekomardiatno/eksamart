@@ -20,8 +20,9 @@ import {
 import RNFS from 'react-native-fs';
 import QRCode from 'react-native-qrcode-svg';
 import Share from 'react-native-share';
+import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default class Struk extends Component {
+class Struk extends Component {
   _viewShot = React.createRef();
   constructor(props) {
     super(props);
@@ -178,7 +179,7 @@ export default class Struk extends Component {
     const { id_transaksi } = this.props.route.params;
     const { toko, transaksi, penjualan } = this.state;
     return (
-      <View style={{ ...styles.container }}>
+      <View style={{ ...styles.container, paddingTop: this.props.insets.top, paddingBottom: this.props.insets.bottom }}>
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => {
@@ -492,3 +493,5 @@ export default class Struk extends Component {
     );
   }
 }
+
+export default withSafeAreaInsets(Struk)

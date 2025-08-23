@@ -17,6 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const styles = require('../components/styles');
 
 import Item from '../components/ItemProductList';
+import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 class ProductList extends Component {
   backHandler;
@@ -307,7 +308,7 @@ class ProductList extends Component {
     };
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: this.props.insets.top, paddingBottom: this.props.insets.bottom }]}>
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => {
@@ -435,4 +436,4 @@ class ProductList extends Component {
   }
 }
 
-export default ProductList;
+export default withSafeAreaInsets(ProductList);

@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import Icon from '@react-native-vector-icons/feather'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { withSafeAreaInsets } from 'react-native-safe-area-context'
 
 const styles = require('../components/styles')
 const { width } = Dimensions.get('window')
@@ -99,7 +100,7 @@ class InputKode extends Component {
 
   render() {
     return (
-      <View style={[styles.container]}>
+      <View style={[styles.container, { paddingTop: this.props.insets.top, paddingBottom: this.props.insets.bottom }]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => {
             this.props.navigation.goBack()
@@ -136,4 +137,4 @@ class InputKode extends Component {
   }
 }
 
-export default InputKode
+export default withSafeAreaInsets(InputKode)

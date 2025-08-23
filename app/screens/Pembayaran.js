@@ -1,19 +1,20 @@
 import { Component } from 'react'
 import {
-    View,
-    Text,
-    StatusBar,
-    TextInput,
-    TouchableOpacity,
-    Animated,
-    Keyboard,
-    ScrollView,
-    ToastAndroid,
-    Modal
+  View,
+  Text,
+  StatusBar,
+  TextInput,
+  TouchableOpacity,
+  Animated,
+  Keyboard,
+  ScrollView,
+  ToastAndroid,
+  Modal
 } from 'react-native'
 import Icon from '@react-native-vector-icons/feather'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import numberFormat from '../helpers/numberFormat'
+import { withSafeAreaInsets } from 'react-native-safe-area-context'
 
 const styles = require('../components/styles')
 
@@ -223,7 +224,7 @@ class Pembayaran extends Component {
       )
     }
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: this.props.insets.top, paddingBottom: this.props.insets.bottom }]}>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
         <View style={styles.header}>
           <TouchableOpacity onPress={() => {
@@ -273,4 +274,4 @@ class Pembayaran extends Component {
   }
 }
 
-export default Pembayaran
+export default withSafeAreaInsets(Pembayaran)

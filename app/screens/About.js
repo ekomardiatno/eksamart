@@ -1,14 +1,15 @@
 import { Component } from 'react'
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    ScrollView,
-    Dimensions,
-    Image
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+  Image
 } from 'react-native'
 import Icon from '@react-native-vector-icons/fontawesome5'
 import Feather from '@react-native-vector-icons/feather'
+import { withSafeAreaInsets } from 'react-native-safe-area-context'
 
 const { width, height } = Dimensions.get('window')
 const styles = require('../components/styles')
@@ -16,7 +17,7 @@ const styles = require('../components/styles')
 class About extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: this.props.insets.top, paddingBottom: this.props.insets.bottom }]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => {
             this.props.navigation.goBack()
@@ -38,19 +39,19 @@ class About extends Component {
             <View style={{ paddingVertical: 6 }}>
               <Text style={[styles.fontBold, styles.textBlack, { marginBottom: 4 }]}>{'Kontak Pengembang'}</Text>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingVertical: 5 }}>
-                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon size={14} style={[styles.textWarning]} name="at" /></View>
+                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon iconStyle='solid' size={14} style={[styles.textWarning]} name="at" /></View>
                 <Text style={[styles.fontReg, styles.textMuted, { paddingLeft: 5, width: width - 30 - 20 }]}>ekomardiatno@gmail.com</Text>
               </View>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingVertical: 5 }}>
-                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon size={14} style={[styles.textDanger]} name="instagram-square" /></View>
-                <Text style={[styles.fontReg, styles.textMuted, { paddingLeft: 5, width: width - 30 - 20 }]}>komafx</Text>
+                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon iconStyle='brand' size={14} style={[styles.textDanger]} name="instagram-square" /></View>
+                <Text style={[styles.fontReg, styles.textMuted, { paddingLeft: 5, width: width - 30 - 20 }]}>emfnc</Text>
               </View>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingVertical: 5 }}>
-                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon size={14} style={[styles.textPrimary]} name="facebook-square" /></View>
+                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon iconStyle='brand' size={14} style={[styles.textPrimary]} name="facebook-square" /></View>
                 <Text style={[styles.fontReg, styles.textMuted, { paddingLeft: 5, width: width - 30 - 20 }]}>emrdtn</Text>
               </View>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingVertical: 5 }}>
-                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon size={14} style={[styles.textInfo]} name="twitter-square" /></View>
+                <View style={[styles.alignCenter, styles.justifyCenter, { width: 20, height: 20, marginLeft: -2 }]}><Icon iconStyle='brand' size={14} style={[styles.textInfo]} name="twitter-square" /></View>
                 <Text style={[styles.fontReg, styles.textMuted, { paddingLeft: 5, width: width - 30 - 20 }]}>ekomardiatno</Text>
               </View>
             </View>
@@ -65,4 +66,4 @@ class About extends Component {
   }
 }
 
-export default About
+export default withSafeAreaInsets(About)

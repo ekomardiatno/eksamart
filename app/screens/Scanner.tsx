@@ -21,7 +21,7 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS } from 'react-native-worklets';
 import FontAwesome5 from '@react-native-vector-icons/fontawesome5';
 import styles from '../components/styles';
-import { useSafeAreaFrame } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import useAppNavigation from '../hooks/useAppNavigation';
 import useAppRoute from '../hooks/useAppRoute';
 const { width, height } = Dimensions.get('window');
@@ -34,6 +34,7 @@ function Scanner() {
   const frame = useSafeAreaFrame();
   const route = useAppRoute<'Scan'>();
   const navigation = useAppNavigation();
+  const insets = useSafeAreaInsets()
 
   useEffect(() => {
     if(hasPermission) {
@@ -228,6 +229,7 @@ function Scanner() {
               right: 0,
               height: (frame.height - scanBoxSize) / 2,
               backgroundColor: 'rgba(0,0,0,.75)',
+              paddingTop: insets.top
             }}
           >
             <View style={[styles.header, {backgroundColor: 'transparent'}]}>
@@ -260,6 +262,7 @@ function Scanner() {
               backgroundColor: 'rgba(0,0,0,.75)',
               alignItems: 'center',
               justifyContent: 'center',
+              paddingBottom: insets.bottom
             }}
           >
             <View>
