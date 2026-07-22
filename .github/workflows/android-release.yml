@@ -39,11 +39,6 @@ jobs:
           echo "APP_NAME=$APP_NAME" >> $GITHUB_ENV
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
-      - name: Generate versionCode (timestamp)
-        run: |
-          VERSION_CODE=$(date +%s)
-          echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
-
       - name: Generate changelog from previous tag
         run: |
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
@@ -103,7 +98,7 @@ jobs:
       - name: Build AAB and APK
         run: |
           cd android
-          ./gradlew bundleRelease assembleRelease -PVERSION_CODE=$VERSION_CODE -x lintVitalAnalyzeRelease -x lintVitalReportRelease
+          ./gradlew bundleRelease assembleRelease -x lintVitalAnalyzeRelease -x lintVitalReportRelease
 
       - name: Rename build outputs with version
         run: |

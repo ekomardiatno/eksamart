@@ -44,6 +44,16 @@ npm test
 - `app/hooks/` — typed navigation hooks (TypeScript)
 - `app/helpers/` — `numberFormat.js` (thousand separators), `dateFormat.js` (Indonesian date formatting)
 
+## Versioning
+
+Version is managed in `package.json` only. The Android `build.gradle` reads it automatically:
+- `versionName` = `package.json` version string
+- `versionCode` = `major * 10000 + minor * 100 + patch` (e.g. `1.2.5` → `10205`)
+
+## CI/CD
+
+GitHub Actions workflow (`.github/workflows/android-release.yml`) triggers on release publish with a `v*` tag. It validates the tag matches `package.json` version, then builds AAB + APK and uploads to the GitHub release. Signing secrets (`ANDROID_KEYSTORE`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`) are stored in GitHub repository secrets.
+
 ## Code Conventions
 
 - Prettier: single quotes, trailing commas, no parens on single arrow params
