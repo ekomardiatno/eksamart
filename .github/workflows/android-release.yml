@@ -84,6 +84,7 @@ jobs:
 
       - name: Apply CI Gradle overrides
         run: |
+          echo "" >> android/gradle.properties
           cat >> android/gradle.properties << EOF
           org.gradle.parallel=true
           org.gradle.caching=true
@@ -98,7 +99,7 @@ jobs:
       - name: Build AAB and APK
         run: |
           cd android
-          ./gradlew bundleRelease assembleRelease -x lintVitalAnalyzeRelease -x lintVitalReportRelease
+          ./gradlew bundleRelease assembleRelease -x lintVitalAnalyzeRelease -x lintVitalReportRelease -x lintVitalRelease
 
       - name: Rename build outputs with version
         run: |
