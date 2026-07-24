@@ -19,80 +19,57 @@ import InputKode from './app/screens/InputKode';
 import Scanner from './app/screens/Scanner';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export type RootStackParamList = {
-  Splash: {
-    params?: {
-      handleBack?: () => void;
-    };
-  };
-  Home: {
-    params?: {
-      handleBack?: () => void;
-    };
-  };
+  Splash: undefined;
+  Home: undefined;
   Scan: {
-    params?: {
-      onScannedCode: (code: string) => void;
-    };
+    onScannedCode: (code: string) => void;
+    handleBack?: (() => void) | null;
   };
   InputKode: {
     params?: {
       handleBack?: () => void;
-      onSubmitCode: (code: string) => void
+      onSubmitCode?: (code: string) => void;
     };
   };
   InfoProduk: {
-    params?: {
-      handleBack?: () => void;
-    };
+    id: string;
+    fromList?: boolean | null;
+    refresh: (() => void) | null;
+    handleBack?: () => void;
   };
   Cart: {
-    params?: {
-      handleBack?: () => void;
-    };
+    handleBack: () => void;
   };
   Stock: {
-    params?: {
-      handleBack?: () => void;
-    };
+    id: string;
+    refresh: () => void;
   };
-  ProductList: {
-    params?: {
-      handleBack?: () => void;
-    };
-  };
+  ProductList:
+    | {
+        handleBack?: () => void;
+      }
+    | undefined;
   Pembayaran: {
-    params?: {
-      handleBack?: () => void;
-    };
+    total: number;
+    handleBack: () => void;
   };
   Struk: {
-    params?: {
-      handleBack?: () => void;
-    };
+    id_transaksi: number;
+    handleBack?: () => void;
   };
-  Belanjaan: {
-    params?: {
-      handleBack?: () => void;
-    };
-  };
-  Toko: {
-    params?: {
-      handleBack?: () => void;
-    };
-  };
+  Belanjaan:
+    | {
+        handleBack?: () => void;
+      }
+    | undefined;
+  Toko: undefined;
   Profil: {
-    params?: {
-      handleBack?: () => void;
-    };
+    handleBack?: () => void;
   };
-  About: {
-    params?: {
-      handleBack?: () => void;
-    };
-  };
+  About: undefined;
 };
 
 function MyStack() {
